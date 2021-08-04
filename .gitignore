@@ -1,0 +1,12 @@
+# Editors
+/.idea/
+[._]*.sw[a-p]
+*~
+
+# Binaries for programs and plugins
+/build/
+/dist/
+icinga-powershell-connector*
+
+# Test files
+*.crt
