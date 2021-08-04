@@ -1,8 +1,8 @@
 # icinga-powershell-connector
 
-This is a little helper, trying to help with issues of high CPU usage with the [Icinga Powershell Framework] on Windows.
+This is an **experimental** mitigation helper, trying to help with issues of high CPU usage with the [Icinga Powershell Framework] on Windows.
 
-In this specific case, you already want top have installed the Icinga Powershell Service, with the
+In this specific case, you already want to have installed the Icinga Powershell Service, with the
 [REST API](https://icinga.com/docs/icinga-for-windows/latest/restapi/doc/02-Installation/) and the
 [API checks](https://icinga.com/docs/icinga-for-windows/latest/apichecks/doc/01-Introduction/) enabled.
 So checks can be run via API, and no Powershell has to be executed for the checks.
@@ -14,6 +14,13 @@ from the REST API. With the normal CheckCommands, Icinga 2 will start the Powers
 smaller systems or VMs, with some Anti Virus software auditing the startup of Powershell.
 
 [Icinga Powershell Framework]: https://icinga.com/docs/icinga-for-windows/latest
+
+**Further reading:**
+
+* https://github.com/Icinga/icinga-powershell-framework/issues/131
+* https://github.com/Icinga/icinga2/issues/8082
+
+Internal notes: ref/NC/730122
 
 ## Requirements
 
