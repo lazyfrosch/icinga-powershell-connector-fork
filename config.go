@@ -41,7 +41,9 @@ func ParseConfigFromFlags() (config *Config, err error) {
 	flag.Parse()
 
 	if config.PrintVersion {
-		_, _ = fmt.Fprintln(os.Stdout, ProgramName + " " + buildVersion())
+		_, _ = fmt.Fprintln(os.Stdout, ProgramName+" "+buildVersion())
+		_, _ = fmt.Fprintln(os.Stdout, License)
+
 		os.Exit(0)
 	}
 
