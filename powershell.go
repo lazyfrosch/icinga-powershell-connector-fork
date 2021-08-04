@@ -43,13 +43,7 @@ func GetPowershellArgs(args []string) (command string, arguments map[string]inte
 			// next argument is also a flag, so this is a switch
 			arguments[arg] = true
 		} else {
-			value := args[i+1]
-
-			if IsPowershellArray(value) {
-				arguments[arg] = ConvertPowershellArray(value)
-			} else {
-				arguments[arg] = value
-			}
+			arguments[arg] = BuildPowershellType(args[i+1])
 			i++
 		}
 	}
@@ -59,6 +53,20 @@ func GetPowershellArgs(args []string) (command string, arguments map[string]inte
 	}
 
 	return
+}
+
+func BuildPowershellType(value string) interface{} {
+	if strings.EqualFold(value, `$null`) {
+		return nil
+	} else if strings.EqualFold(value, `$true`) {
+		return true
+	} else if strings.EqualFold(value, `$false`) {
+		return false
+	} else if IsPowershellArray(value) {
+		return ConvertPowershellArray(value)
+	} else {
+		return value
+	}
 }
 
 // ConvertPowershellArray to a golang type.
