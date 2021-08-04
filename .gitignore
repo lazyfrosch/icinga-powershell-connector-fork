@@ -7,6 +7,8 @@
 /build/
 /dist/
 icinga-powershell-connector*
+powershell-connector*
+*.exe
 
 # Test files
 *.crt
