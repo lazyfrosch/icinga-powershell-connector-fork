@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -28,8 +29,14 @@ func (a RestAPI) ExecuteCheck(command string, arguments map[string]interface{}) 
 	defer cancel()
 
 	// Build request
-	req, err := http.NewRequestWithContext(
-		ctx, "POST", a.URL+"/v1/checker?command="+url.QueryEscape(command), bytes.NewReader(body))
+	requestUrl := a.URL + "/v1/checker?command=" + url.QueryEscape(command)
+
+	log.WithFields(log.Fields{
+		"body": string(body),
+		"url":  requestUrl,
+	}).Debug("sending request")
+
+	req, err := http.NewRequestWithContext(ctx, "POST", requestUrl, bytes.NewReader(body))
 	if err != nil {
 		return nil, fmt.Errorf("could not build request: %w", err)
 	}
@@ -49,6 +56,8 @@ func (a RestAPI) ExecuteCheck(command string, arguments map[string]interface{}) 
 	if err != nil {
 		return nil, fmt.Errorf("could not read result: %w", err)
 	}
+
+	log.WithField("body", string(resultBody)).Debug("received response")
 
 	if resp.StatusCode != 200 {
 		return nil, fmt.Errorf("API request not successful code=%d: %s", resp.StatusCode, string(resultBody))
