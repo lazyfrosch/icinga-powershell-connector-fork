@@ -42,7 +42,7 @@ func ParseConfigFromFlags() (config *Config, err error) {
 
 	if config.PrintVersion {
 		_, _ = fmt.Fprintln(os.Stdout, ProgramName+" "+buildVersion())
-		_, _ = fmt.Fprintln(os.Stdout, License)
+		_, _ = fmt.Fprint(os.Stdout, License+"\n")
 
 		os.Exit(0)
 	}
